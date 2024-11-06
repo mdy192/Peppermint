@@ -3,6 +3,12 @@
 import os
 import time
 
+def text2dict(text):
+    text_dict = []
+    for char in text:
+        text_dict.append(ord(char))
+    return text_dict 
+
 def peppermintEncrypt():
     os.system('cls')
     print("PeppermintEncrypt Chosen")
@@ -10,7 +16,8 @@ def peppermintEncrypt():
     user_cleartext = input("Enter Cleartext: ")
     timenow = int(time.time())
     time_hour = timenow // 3600
-    print(user_cleartext)
+
+    print(text2dict(user_cleartext))
     print(time_hour)
 
 def peppermintDecrypt():
