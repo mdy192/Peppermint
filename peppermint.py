@@ -10,23 +10,34 @@ def text2list(text):
         text_list.append(ord(char))
     return text_list
 
-def seperate_under_127(x):
-    #Seperates a long character string into pieces that are ord() 127 or below
+def decode_separate_32_127(x):
+    
+    #Figure out how to decode
+    pass
+
+def seperate_32_127(x):
+    #Seperates a long character string into pieces that are ord() 127 or below but above 32
     result = []
     i = 0
-
-    while i < len(x):
-        number = 0
-        for j in range(i, len(x)):
-            next_number = int(x[i:j+1])
-            if next_number <= 127:
-                number = next_number
-            else:
-                break
-        result.append(number)
-
-        i += len(str(number))
     
+    # Loop through the string and extract valid ASCII numbers (32-127)
+    while i < len(x):
+        # Try extracting 1, 2, or 3 digit numbers from the string
+        for length in range(1, 4):  # ASCII codes are 1-3 digits long
+            if i + length <= len(x):
+                # Try extracting the substring as a number
+                num_str = x[i:i+length]
+                try:
+                    num = int(num_str)
+                    if 32 <= num <= 127:
+                        result.append(num)
+                        i += length  # Move past the current valid number
+                        break
+                except ValueError:
+                    continue
+        else:
+            i += 1  # If no valid number found, skip by 1
+
     return result
     
 def peppermintEncrypt():
@@ -63,7 +74,7 @@ def peppermintEncrypt():
 
     single_element = ''.join(combined_list_str)
 
-    peppermint_encoded_list = seperate_under_127(single_element)
+    peppermint_encoded_list = seperate_32_127(single_element)
 
     # Turns the new string values into ASCII text
 
@@ -83,20 +94,34 @@ def peppermintDecrypt():
 
     user_ciphertext_list_ord = []
 
-    user_ciphertext = (input("Please enter the ciphertext: \n"))
+    ciphertext = (input("Please enter the ciphertext: \n"))
 
-    user_code = (input("Please enter code: \n"))
+    time_code = (input("Please enter code: \n"))
 
-    # Seperates the characters in the encoded text
+    ascii_values = [ord(char) for char in ciphertext]
 
-    for char in user_ciphertext:
-        user_ciphertext_list_ord.append(ord(char))
+    combined_list = []
+    time_code_split = [int(num) for num in time_code]
+    
+    longer_list = ascii_values if len(ascii_values) >= len(time_code_split) else time_code_split
+    shorter_list = time_code_split if len(ascii_values) >= len(time_code_split) else ascii_values
 
-    print(user_ciphertext_list_ord) 
-    print(user_code) 
+    # Rebuild the combined list by alternating the values
+    for i in range(len(longer_list)):
+        combined_list.append(longer_list[i])
+        combined_list.append(shorter_list[i % len(shorter_list)])
 
-    #print("""PeppermintDecrypt not integrated yet, sorry
-          #🦌⋆꙳•❅*• •*❆ ₊⋆✮⋆˙""")
+    combined_list_str = ''.join(str(i) for i in combined_list)
+
+    decoded_ascii = decode_separate_32_127(combined_list_str)
+    
+    # Convert the list of ASCII values back into characters
+    decrypted_text = ''.join(chr(num) for num in decoded_ascii)
+
+    # Output the decrypted text
+    print(f"Decrypted Text: \n{decrypted_text}")
+    print("""Thank you for using Peppermint
+          🦌⋆꙳•❅*• •*❆ ₊⋆✮⋆˙""") 
 
 def peppermint(*x):
     os.system('cls')
