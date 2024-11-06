@@ -1,3 +1,6 @@
 # Peppermint
-This encryption method is based on the infamous "Candy Cane"
+This encryption method is based on the infamous "Candy Cane."
 ---
+This encryption method is based on a candy cane, and I chose "Peppermint" as the name cause it sounds cooler than Candy Cane. I love the flavor of peppermint, especially with the winter season around the corner, so I figured, why not put my coding and cybersecurity experience to the test and improve my GitHub simultaneously! (Brilliant, I know).
+
+The fundamentals of this encryption method are that it takes the user input and generates a code given the current time (Day/Hour/Minutes) and, based on the result, will convert the user's input into decimal and with the code be inserted in between the characters (like how the red and white stripes on a candy cane alternate). Once the code is integrated all the way through, it will read the code in a way I don't quite know how, except the result will be characters that *should* be unreadable without knowing the code used to make it. Once I create the code and it works as intended, I will add the option to decrypt a given ciphertext using the code generated with the text. This project will surely be the hardest one I make to date since I have to learn just how to even get the code to perform the necessary steps, however, I will surely learn more about encryption and decryption and improve my coding skills. 
