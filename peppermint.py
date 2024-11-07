@@ -29,7 +29,9 @@ def seperate_32_127(x):
                 num_str = x[i:i+length]
                 try:
                     num = int(num_str)
-                    if 32 <= num <= 127:
+                    if num == 0:
+                        result.append(167) # Appends § character
+                    if 32 <= num < 127:
                         result.append(num)
                         i += length  # Move past the current valid number
                         break
@@ -75,7 +77,7 @@ def peppermintEncrypt():
     single_element = ''.join(combined_list_str)
 
     peppermint_encoded_list = seperate_32_127(single_element)
-
+    print(peppermint_encoded_list)
     # Turns the new string values into ASCII text
 
     ciphertext_str = [chr(num) for num in peppermint_encoded_list]
