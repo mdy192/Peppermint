@@ -12,8 +12,12 @@ def text2list(text):
 
 def decode_separate_32_127(x):
     
-    #Figure out how to decode
-    pass
+    pass #remove when ready to decode
+    ciphertext = input("Please enter ciphertext: ")    
+    ciphertext_code = input("Please enter ciphertext_code: ")
+
+    single_ciphertext = []
+
 
 def seperate_32_127(x):
     #Seperates a long character string into pieces that are ord() 127 or below but above 32
