@@ -23,20 +23,28 @@ def seperate_32_127(x):
     # Loop through the string and extract valid ASCII numbers (32-127)
     while i < len(x):
         # Try extracting 1, 2, or 3 digit numbers from the string
-        for length in range(1, 4):  # ASCII codes are 1-3 digits long
-            if i + length <= len(x):
+        for length in range(1, 4): 
+            if i + length < len(x):
                 # Try extracting the substring as a number
                 num_str = x[i:i+length]
                 try:
                     num = int(num_str)
                     if num == 0:
-                        result.append(167) # Appends § character
+                        result.append(5257) # Appends ᒉ character
                     if 32 <= num < 127:
                         result.append(num)
-                        i += length  # Move past the current valid number
+                        i += length  
                         break
                 except ValueError:
                     continue
+            # Add 9219 to last digit if it is less than 32
+            if i + length == len(x):
+                num_str = x[i:i+length]
+                
+                num = int(num_str)
+                    
+                result.append(num + 9419)
+                return result
         else:
             i += 1  # If no valid number found, skip by 1
 
@@ -59,7 +67,7 @@ def peppermintEncrypt():
     # Creates a new list where the two lists (cleartext & 6-digit time code) will be combined, 
     # via alternating and the shorter list being repeated when there are insufficient characters
     combined_list = []
-
+    
     TextInList = text2list(user_cleartext)
 
     longer_list = TextInList if len(TextInList) >= len(time_hour_split) else time_hour_split
@@ -73,7 +81,7 @@ def peppermintEncrypt():
 
     for i in combined_list:
         combined_list_str.append(str(i))
-
+    print(combined_list_str)
     single_element = ''.join(combined_list_str)
 
     peppermint_encoded_list = seperate_32_127(single_element)
